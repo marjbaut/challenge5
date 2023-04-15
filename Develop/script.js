@@ -19,101 +19,35 @@ var dataInput = $(this).siblings('.description').val();
 
 
 
- // USER CLICKS SAVE
+// USER CLICKS SAVE
 $('.saveBtn').on('click', function(event){
     console.log('you clicked save');
-    event.preventDefault();
   //var input text by user 
     var dataInput = $(this).siblings('.description').val();
   localStorage.setItem('dataInput', dataInput);
+  event.preventDefault();
+localStorage.getItem('dataInput');
 })
 
-
-
-
-
-
-
- //Function
-  //save data input
-  
-  // display data input after refresh
-
-
-//Save data in local storage
-//  function saveInput(dataInput){
-//   localStorage.setItem('dataInput', jason.stringify(dataInput));  
-// }
-//  var dataInput = readInput();
-// //Display saved area and returns array
-// function readInput(){
-//   var dataInput = localStorage.getItem('dataInput');
-//   if (dataInput !== null){
-//    return; 
-//   } else{
-//    return dataInput= JSON.parse(dataInput);
-//   }
-// }
-
-
-//  var saveButton = document.querySelector('.btn');
-//   var toDoText = document.querySelector('.description');
-//   var example;
-//////-----------ONE FUNCTION
-// saveButton.addEventListener('click', function(event){ 
-//   event.preventDefault();
-//   console.log ('test SAVE');  
-//   var toDoText= {
-// }
-// example = doc
-// localStorage.setItem('toDoText', JSON.stringify(toDoText));
-//       renderMessage();
-//  });     
-
-// function renderMessage(){
-//   var toDoText = JSON.parse(localStorage.getItem("toDoText"));
-//   // var test = JSON.parse(localStorage.getItem('toDoText'));
-//   if( toDoText!== null){
-//     var toDoText = JSON.parse(localStorage.getItem("toDoText"));
-//     toDoText.textContent = toDoText.text ;
-  
-// }
-// }
-//-------------FUNCTION
-//  saveButton.addEventListener('click', function(event){ 
-//   console.log ('test SAVE');
-//     event.preventDefault();
-//     localStorage.setItem('toDoText', JSON.stringify(toDoText));
-
-//     // localStorage.getItem('toDoText',);
-//       if( toDoText !== null ) {
-//         JSON.parse(localStorage.getItem(toDoText));
-//         console.log(toDoText); 
-// }});
-
-
-
-  
-  // toDoText.textContent= toDoText;
-// function saveButton (){
-//     var input = document.querySelector('.description').value;
-//     input.innerHTML = (input);
-
-// }
-
-
-  
-
-
-  // TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
-  //
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
-  //
-  // TODO: Add code to display the current date in the header of the page.
-// });
+function timeColorChange(){
+    // current day and current hour 
+   var currentTime = dayjs().hour() ; // this gets current time (number)
+    console.log(dayjs().hour());
+    // past time (number)/ we will split the ID 
+    $('.time-block').each(function(){
+      var blockTime = parseInt($(this).attr('id').split('-')[1]);
+      console.log(blockTime);
+      // if statements for each block that has time
+    if(blockTime > currentTime){
+      $(this).addClass('future');
+    }else if(blockTime < currentTime) {
+      $(this).addClass('past');
+      $(this).removeClass('present')
+  }else {
+    $(this).removeClass('past');
+    $(this).removeClass('future');
+    $(this).addClass('present');
+  }
+});
+};
+timeColorChange();
